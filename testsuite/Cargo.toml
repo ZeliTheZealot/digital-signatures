@@ -1,0 +1,16 @@
+[package]
+name = "testsuite"
+version = "0.1.0"
+authors = ["fqliao <fqliao@yeah.net>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+criterion = "0.2.11"
+add_one = { path = "../add_one"}
+add_two = { path ="../add_two"}
+
+[[bench]] # for criterion bench test config
+name = "criterion_pow"
+harness = false
