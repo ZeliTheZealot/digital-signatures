@@ -1,8 +1,7 @@
 [workspace]
 
 members = [
-    "testsuite",
-    "adder",
-    "add_one",
-    "add_two"
+    "common",
+    "multisig",
+    "testsuite"
 ]

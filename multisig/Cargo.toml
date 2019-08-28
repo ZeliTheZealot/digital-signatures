@@ -1,5 +1,5 @@
 [package]
-name = "testsuite"
+name = "multisig"
 version = "0.1.0"
 authors = ["zeliwang"]
 edition = "2018"
@@ -19,12 +19,10 @@ generic-array = "0.13.2"
 schnorrkel = "0.8.5"
 rand_core = "0.5.0"
 #rand_chacha = "0.1.0"
-common = { path = "../common"}
-multisig = { path = "../multisig"}
 
 [dependencies.rand]
 #rand = {git="https://github.com/rust-random/rand.git"}
-version = "0.4"
+version = "0.6"
 #version = "0.7.0"
 default-features = false
 optional = true
@@ -39,7 +37,5 @@ optional = true
 default = ["rand", "chacha"] #   "u64_backend",   "std",
 chacha = ["rand_chacha"]
 
-#[[bench]] # for criterion bench test config
-#name = "criterion_pow"
-#harness = false
+
 
