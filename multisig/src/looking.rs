@@ -8,19 +8,7 @@
 //! First, we need to generate a `Keypair`, which includes both public and
 //! secret halves of an asymmetric key.  To do so, we need a cryptographically
 //! secure pseudorandom number generator (CSPRNG).
-//! ```
-//! # [cfg(all(feature = "std"))]
-//! # fn main() {
-//! use rand::{Rng, rngs::OsRng};
-//! use schnorrkel::{Keypair,Signature};
-//!
-//! let mut csprng: OsRng = OsRng::new().unwrap();
-//! let keypair: Keypair = Keypair::generate_with(&mut csprng);
-//! # }
-//! #
-//! # #[cfg(any(not(feature = "std")))]
-//! # fn main() { }
-//! ```
+
 //!
 //! We can now use this `keypair` to sign a message:
 //!

@@ -8,7 +8,7 @@
 //! and the private key.
 //!
 //! ```
-//! use digital_signature::common::ecdsa::*;
+//! use common::ecdsa::*;
 //! fn main() {
 //! let mut common_parameters = initialize();
 //! let (public_key, private_key) = generate_key_pair(&mut common_parameters).unwrap();
@@ -18,7 +18,7 @@
 //! We can now use the private key to sign our message str.
 //!
 //! ```
-//! # use digital_signature::common::ecdsa::*;
+//! # use common::ecdsa::*;
 //! # fn main() {
 //! # let mut common_parameters = initialize();
 //! # let (public_key, private_key) = generate_key_pair(&mut common_parameters).unwrap();
@@ -30,7 +30,7 @@
 //! To verify that the signature is valid for our message, we use the public key.
 //!
 //! ```
-//! # use digital_signature::common::ecdsa::*;
+//! # use common::ecdsa::*;
 //! # fn main() {
 //! # let mut common_parameters = initialize();
 //! # let (public_key, private_key) = generate_key_pair(&mut common_parameters).unwrap();
@@ -44,7 +44,7 @@
 //! signing function.
 //!
 //! ```
-//! # use digital_signature::common::ecdsa::*;
+//! # use common::ecdsa::*;
 //! # fn main() {
 //! # let mut common_parameters = initialize();
 //! # let (public_key, private_key) = generate_key_pair(&mut common_parameters).unwrap();
