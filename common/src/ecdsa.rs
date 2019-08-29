@@ -196,7 +196,7 @@ fn test_sign_and_verify_short_message() {
 #[test]
 fn test_sign_and_verify_long_message() {
     let mut common_parameters = initialize();
-    let message = "hello from the other side hello darkness my old friend";
+    let message = "hello from the other side i must have called a thousand times";
     let (public_key, private_key) = generate_key_pair(&mut common_parameters).unwrap();
     let (signature, _) = sign(&message, &private_key).unwrap();
     assert!(verify(&message, &signature, &public_key));
