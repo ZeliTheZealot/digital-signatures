@@ -8,7 +8,6 @@ edition = "2018"
 
 [dependencies]
 libsecp256k1 = "0.2.2"
-#rand = { version = "0.4", default-features = false }
 hmac-drbg = "0.1"
 sha2 = "0.6"
 digest = "0.6"
@@ -16,25 +15,20 @@ typenum = "1.9"
 arrayref = "0.3"
 secp256k1-test = "0.7"
 generic-array = "0.13.2"
-schnorrkel = "0.8.5"
 rand_core = "0.5.0"
-#rand_chacha = "0.1.0"
 
 [dependencies.rand]
-#rand = {git="https://github.com/rust-random/rand.git"}
 version = "0.4"
-#version = "0.7.0"
 default-features = false
 optional = true
-#features = ["i128_support", "nightly"] #no nightly originally
 
 [dependencies.rand_chacha]
-version = "0.1" # 0.2
+version = "0.1"
 default-features = false
 optional = true
 
 [features]
-default = ["rand", "chacha"] #   "u64_backend",   "std",
+default = ["rand", "chacha"]
 chacha = ["rand_chacha"]
 
 
