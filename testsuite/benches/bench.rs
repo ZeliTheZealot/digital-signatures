@@ -9,8 +9,6 @@ use test::Bencher;
 //use common::ecdsa;
 //use multisig::schnorr;
 
-//this bench takes the longest time, compared to key generation and verification
-//i know this from benching libsecp256k1
 #[cfg(test)]
 #[bench]
 fn bench_sign_message_libsecp256k1(b: &mut Bencher) {
@@ -22,11 +20,10 @@ fn bench_sign_message_libsecp256k1(b: &mut Bencher) {
     });
 }
 
-//consider writing other benches
 #[cfg(test)]
 #[bench]
 fn bench_sign_message_schnorr(b: &mut Bencher) {
-    let common_parameters = multisig::schnorr::initialize("this thing");
+    let common_parameters = multisig::schnorr::initialize("this signature does this thing");
     let message = "hello world";
     let key_pair = multisig::schnorr::generate_key_pair().unwrap();
     b.iter(|| {

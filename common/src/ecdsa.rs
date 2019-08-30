@@ -2,8 +2,6 @@
 //!
 //! # Example
 //!
-//! Creating a signature on a message is simple.
-//!
 //! First, we need to initialise the crate and generate the key-pair which include the public key
 //! and the private key.
 //!
@@ -136,7 +134,7 @@ fn to_message(message: &str) -> secp256k1::Message {
 
 pub fn initialize() -> CommonParameters {
     let secp256k1 = secp256k1_test::Secp256k1::new();
-    CommonParameters{secp256k1, rng: rand::thread_rng()}
+    CommonParameters{secp256k1, rng: thread_rng()}
 }
 
 pub fn generate_key_pair(common_parameters: &mut CommonParameters) -> Result<(

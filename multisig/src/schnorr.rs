@@ -1,3 +1,57 @@
+//! This crate wraps schnorrkel. The message is a str and we use Sha256 for hashing.
+//!
+//! # Example
+//!
+//! First, we need to initialise the crate and generate the key-pair.
+//!
+//! ```
+//! use multisig::schnorr::*;
+//! fn main() {
+//! let common_parameters = initialize("this signature does this thing");
+//! let key_pair = generate_key_pair().unwrap();
+//! }
+//! ```
+//!
+//! We can now use the key-pair to sign our message str. Note that signing requires the key-pair and
+//! not just the private key.
+//!
+//! ```
+//! # use multisig::schnorr::*;
+//! # fn main() {
+//! # let common_parameters = initialize("this signature does this thing");
+//! # let key_pair = generate_key_pair().unwrap();
+//! let message = "hello world";
+//! let signature = sign(message, &key_pair, &common_parameters).unwrap();
+//! }
+//! ```
+//!
+//! To verify that the signature is valid for our message, we usually use the public key alone.
+//!
+//! ```
+//! # use multisig::schnorr::*;
+//! # fn main() {
+//! # let common_parameters = initialize("this signature does this thing");
+//! # let key_pair = generate_key_pair().unwrap();
+//! # let message = "hello world";
+//! # let signature = sign(message, &key_pair, &common_parameters).unwrap();
+//! let public_key = key_pair_to_public_key(&key_pair);
+//! assert!(verify_with_public_key(message, &signature, &public_key, &common_parameters));
+//! }
+//! ```
+//!
+//! However, you can also verify the signature with the key-pair.
+//!
+//! ```
+//! # use multisig::schnorr::*;
+//! # fn main() {
+//! # let common_parameters = initialize("this signature does this thing");
+//! # let key_pair = generate_key_pair().unwrap();
+//! # let message = "hello world";
+//! # let signature = sign(message, &key_pair, &common_parameters).unwrap();
+//! assert!(verify_with_key_pair(message, &signature, &key_pair, &common_parameters));
+//! }
+//! ```
+
 extern crate rand;
 extern crate rand_core;
 extern crate rand_chacha;
@@ -20,7 +74,6 @@ pub struct Signature {
     signature: schnorrkel::Signature,
 }
 
-///signing requires KeyPair (not just private key)
 pub struct KeyPair {
     key_pair: schnorrkel::Keypair,
 }
@@ -53,7 +106,6 @@ pub fn generate_key_pair() -> Result<KeyPair, Error> {
 }
 
 pub fn sign(message: &str, key_pair: &KeyPair, common_parameters: &CommonParameters) -> Result<Signature, Error> {
-//    let message_as_bytes = message.as_bytes();
     let message_input = to_message(message);
     let signature = key_pair.key_pair.sign(common_parameters.context.bytes(&message_input));
     Ok(Signature{signature})
@@ -80,7 +132,7 @@ pub fn verify_with_public_key(message: &str, signature: &Signature, public_key: 
 
 #[test]
 fn test_sign_and_verify_short_message_with_public_key() {
-    let common_parameters = initialize("this thing");
+    let common_parameters = initialize("this signature does this thing");
     let message = "hello world";
     let key_pair = generate_key_pair().unwrap();
     let signature = sign(message, &key_pair, &common_parameters).unwrap();
@@ -90,7 +142,7 @@ fn test_sign_and_verify_short_message_with_public_key() {
 
 #[test]
 fn test_sign_and_verify_long_message_with_public_key() {
-    let common_parameters = initialize("this thing");
+    let common_parameters = initialize("this signature does this thing");
     let message = "hello from the other side i must have called a thousand times";
     let key_pair = generate_key_pair().unwrap();
     let signature = sign(message, &key_pair, &common_parameters).unwrap();
@@ -100,7 +152,7 @@ fn test_sign_and_verify_long_message_with_public_key() {
 
 #[test]
 fn test_sign_and_verify_short_message_with_key_pair() {
-    let common_parameters = initialize("this thing");
+    let common_parameters = initialize("this signature does this thing");
     let message = "hello world";
     let key_pair = generate_key_pair().unwrap();
     let signature = sign(message, &key_pair, &common_parameters).unwrap();
@@ -109,7 +161,7 @@ fn test_sign_and_verify_short_message_with_key_pair() {
 
 #[test]
 fn test_sign_and_verify_long_message_with_key_pair() {
-    let common_parameters = initialize("this thing");
+    let common_parameters = initialize("this signature does this thing");
     let message = "hello from the other side i must have called a thousand times";
     let key_pair = generate_key_pair().unwrap();
     let signature = sign(message, &key_pair, &common_parameters).unwrap();
